@@ -107,7 +107,7 @@ Ajo toimi oletetusti:
 
 Binäärin voi myös suorittaa graafisessa käyttöliittymässä tuplaklikkaamalla tiedostoa:
 
-![alt text](https://github.com/nikke845/Go-Programming-Course-2020/blob/master/day2/osa1/mac_doubleclick.jpg "Binäärin suoritus tuplaklikkaamalla")
+![alt text](https://github.com/nikke845/Go-Programming-Course-2020/blob/master/day2/osa1/doubleclick.jpg "Binäärin suoritus tuplaklikkaamalla")<br>
 
 # Kirjastoja kohti. Kirjoita ohjelma, joka käyttää kahta uutta ominaisuutta tai kirjastoa Go by Example-kirjasta.
 
