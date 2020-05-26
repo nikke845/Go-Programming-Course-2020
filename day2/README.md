@@ -103,11 +103,11 @@ Binäärin siirron jälkeen mac koneelle ajetaan binääri:
 
 Ajo toimi oletetusti:
 
-![Binäärin suoritus terminaalilla](https://github.com/nikke845/Go-Programming-Course-2020/blob/master/day2/osa1/mac_run.jpg)
+![alt text](https://github.com/nikke845/Go-Programming-Course-2020/blob/master/day2/osa1/mac_run.jpg "Binäärin suoritus terminaalilla")
 
 Binäärin voi myös suorittaa graafisessa käyttöliittymässä tuplaklikkaamalla tiedostoa:
 
-![Binäärin suoritus tuplaklikkaamalla](https://github.com/nikke845/Go-Programming-Course-2020/blob/master/day2/osa1/mac_run_doubleclick.jpg)
+![alt text](https://github.com/nikke845/Go-Programming-Course-2020/blob/master/day2/osa1/mac_run_doubleclick.jpg "Binäärin suoritus tuplaklikkaamalla")
 
 # Kirjastoja kohti. Kirjoita ohjelma, joka käyttää kahta uutta ominaisuutta tai kirjastoa Go by Example-kirjasta.
 
