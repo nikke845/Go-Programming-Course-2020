@@ -1,4 +1,5 @@
-Tehtävän teossa on käytetty apuna GO:n [dokumentaatiota.](https://golang.org/pkg/flag/)
+Pohjana Tero Karvinen 2020: [Go Programming Course 2020](http://terokarvinen.com/2020/go-programming-course-2020-w22/)<br>
+Tehtävän teossa on käytetty apuna Go:n [dokumentaatiota.](https://golang.org/pkg/flag/)
 
 # Kirjoita itse keksimäsi ohjelma, joka lukee käyttäjältä syötteen (flag) ja tulostaa käyttäjälle tekstiä.
 

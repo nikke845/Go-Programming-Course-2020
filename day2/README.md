@@ -1,3 +1,4 @@
+Pohjana Tero Karvinen 2020: [Go Programming Course 2020](http://terokarvinen.com/2020/go-programming-course-2020-w22/)<br>
 Tehtävän teossa on käytetty apuna Go:n [dokumentaatiota.](https://golang.org/doc/)
 
 # LinWinMac! Käännä ohjelma kolmelle alustalle: Windows, Linux, Mac. Tee staattinen käännös niin, että ohjelma toimii ilman mitään riippuvuuksia tai kirjastoja. Testaa ohjelman toiminta ainakin joillain näistä alustoista ja ota ruutukaappaukset.
