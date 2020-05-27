@@ -18,8 +18,8 @@ func getFlag()string{
 
 func checkConnection(site string)string{
 	resp, err := http.Get(site)
-    if err != nil {
-        panic(err)
+	if err != nil {
+		panic(err)
 	}
 	defer resp.Body.Close()
 	fmt.Println(site,"status:",resp.Status)
