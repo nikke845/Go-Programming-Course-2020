@@ -119,7 +119,7 @@ Usage of ./weather:
 
 ### Kirjastot ja lähteet
 
-Ohjelmassa käytin yhtä [ulkopuolista kirjastoa "percent.go"](https://github.com/dariubs/percent), jolla käänsin float64 arvon prosentiksi.
+Ohjelmassa käytin yhtä [ulkopuolista kirjastoa "percent.go"](https://github.com/dariubs/percent), jolla käänsin float64 arvon prosentiksi. Kirjaston lisenssi (MIT) [löytyy täältä.](https://github.com/dariubs/percent/blob/master/license)
 
 Ohjelman teossa käytin pääasiassa lähteinä [Go:n omaa dokumentaatiota](https://golang.org/doc/), mutta käytin myös muutamaa verkosta löytynyttä koodi esimerkkiä:
 
