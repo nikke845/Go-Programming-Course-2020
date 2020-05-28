@@ -6,9 +6,21 @@ import "encoding/json"
 import "io/ioutil"
 import "flag"
 import "os"
+import "time"
+import "github.com/dariubs/percent"
+import "strings"
 
+func readApiKey()string{
+	bytes, err := ioutil.ReadFile(".env")
+	if err != nil {
+		panic(err)
+	}
+	a := (string(bytes))
+	key := strings.TrimSuffix(a, "\n")
+	return key
+}
 
-func makeUrl()(string,string){
+func makeUrl(apiKey string)(string,string){
 	var latitude string
 	var longitude string
 	var filename string
@@ -16,7 +28,7 @@ func makeUrl()(string,string){
 	flag.StringVar(&longitude, "longitude", "24.945831", "City's longitude")
 	flag.StringVar(&filename, "file", "", "Filename for optional data logging")
 	flag.Parse()
-	completeUrl:= fmt.Sprintf("%v%v%v%v%v", "https://api.darksky.net/forecast/785d4ef0e760c496fe6fbd387bdbbc2c/", latitude,",", longitude,"?units=auto&exclude=minutely,hourly,daily,alerts,flags")
+	completeUrl:= fmt.Sprintf("%v%v%v%v%v%v%v", "https://api.darksky.net/forecast/",apiKey,"/", latitude,",", longitude,"?units=auto&exclude=minutely,hourly,daily,alerts,flags")
 	return completeUrl, filename
 }
 
@@ -45,7 +57,9 @@ func printWheather(b []byte)string{
 	fmt.Println("Current temperature:", ct)
 
 	precipP := (currently["precipProbability"])
-	ppc := fmt.Sprintf("%v%%", precipP)
+	f := precipP.(float64)
+	converted := percent.PercentOfFloat(f, 1)
+	ppc := fmt.Sprintf("%v%%", converted)
 	fmt.Println("Chance of rain:", ppc)
 
 	wind := (currently["windSpeed"])
@@ -56,20 +70,53 @@ func printWheather(b []byte)string{
 	sc := fmt.Sprintf("%v", summary)
 	fmt.Println("Summary:", sc)
 
-	writeToFile := fmt.Sprintf("%v%v%v%v%v%v%v%v","Temperature: ", ct, " Chance of rain: ", ppc, " Wind Speed: ", wc, " Summary: ", sc)
+	writeToFile := fmt.Sprintf("%v%v%v%v%v%v%q",temp,",",converted,",",wind,",",summary)
 	return writeToFile
 }
 
-func writeToFile(filename string, a string){
+func dateTime()string{
+	const(
+		RFC3339 = "2006-01-02T15:04:05Z07:00"
+	)
+	t := time.Now().Format(RFC3339)
+	timeDate := fmt.Sprintf("%q" ,t)
+	return timeDate
+}
+
+func writeToFile(filename string, a string, t string){
 	if filename == ""{
 		return
 	} else {
-		f, err := os.OpenFile(filename, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+
+		if _, err := os.Stat(filename); os.IsNotExist(err) {
+			f, err := os.OpenFile(filename, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+    		if err != nil {
+        	fmt.Println(err)
+        	return
+			}
+			firstline := "Time,Temperature,RainProbability,WindSpeed,Summary"
+    		_, err = fmt.Fprintln(f, firstline)
+    		if err != nil {
+        	fmt.Println(err)
+            f.Close()
+        	return
+    		}
+    		err = f.Close()
+    		if err != nil {
+        	fmt.Println(err)
+        	return
+			}
+		}
+
+
+
+		f, err := os.OpenFile(filename, os.O_APPEND|os.O_WRONLY, 0644)
     	if err != nil {
         	fmt.Println(err)
         	return
-    	}
-    	_, err = fmt.Fprintln(f, a)
+		}
+		line := fmt.Sprintf("%v%v%v", t , ",", a)
+    	_, err = fmt.Fprintln(f, line)
     	if err != nil {
         	fmt.Println(err)
             f.Close()
@@ -82,11 +129,14 @@ func writeToFile(filename string, a string){
 		}
 	}
 }
+
 func main(){
-	url, filename := makeUrl()
+	key := readApiKey()
+	url, filename := makeUrl(key)
 	wheather := getWheather(url)
 	data := printWheather(wheather)
-	writeToFile(filename,data)
+	dateTime := dateTime()
+	writeToFile(filename, data, dateTime)
 	fmt.Println("-------------------")
 	fmt.Println("Powered by Dark Sky")
 	fmt.Println("https://darksky.net/poweredby/")
